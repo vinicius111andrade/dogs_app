@@ -34,7 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/text"
-                android:text="Life span"/>
+                android:text="Lifespan"/>
         </LinearLayout>
 
     </LinearLayout>
