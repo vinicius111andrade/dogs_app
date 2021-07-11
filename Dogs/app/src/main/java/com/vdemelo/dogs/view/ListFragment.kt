@@ -22,7 +22,6 @@ class ListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_list, container, false)
     }
 
@@ -47,7 +46,7 @@ class ListFragment : Fragment() {
         observeViewModel()
     }
 
-    fun observeViewModel() {
+    private fun observeViewModel() {
         viewModel.dogs.observe(this, Observer {dogs ->
             dogs?.let {
                 dogsList.visibility = View.VISIBLE
@@ -56,7 +55,6 @@ class ListFragment : Fragment() {
         })
 
         viewModel.dogsLoadError.observe(this, Observer {isError ->
-            // isError?.let means it will only run if isError is not null
             isError?.let {
                 listError.visibility = if(it) View.VISIBLE else View.GONE
             }
