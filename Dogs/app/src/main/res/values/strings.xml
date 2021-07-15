@@ -1,4 +1,8 @@
 <resources>
+
+    <!-- System-->
+    <string name="app_name">Dogs</string>
+
     <!-- Item List Texts -->
     <string name="item_list_dog_name">Dog name</string>
     <string name="item_list_lifespan">Lifespan</string>
