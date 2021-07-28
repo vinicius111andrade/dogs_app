@@ -1,6 +1,7 @@
 package com.vdemelo.dogs.viewmodel
 
 import android.app.Application
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.vdemelo.dogs.model.DogBreed
@@ -17,6 +18,10 @@ class ListViewModel(application: Application) : BaseViewModel(application) {
 
     private var prefHelper = SharedPreferencesHelper(getApplication())
 
+    // correct name: timeToLive
+    private var refreshTime: Long =
+        5 * 60 * 1000 * 1000 * 1000L //5 min em nano sec, o L eh pra salvar em Long
+
     private val dogService = DogsApiService()
     private val disposable = CompositeDisposable()
 
@@ -25,7 +30,30 @@ class ListViewModel(application: Application) : BaseViewModel(application) {
     val loading = MutableLiveData<Boolean>()
 
     fun refresh() {
+        val updateTime = prefHelper.getUpdateTime()
+
+        if (updateTime != null && updateTime != 0L && System.nanoTime() - updateTime < refreshTime) {
+            fetchFromDatabase()
+        } else
+            fetchFromRemote()
+    }
+
+    fun refreshBypassCache() {
         fetchFromRemote()
+    }
+
+    private fun fetchFromDatabase() {
+        loading.value = true
+        launch {
+            val dogs = DogDataBase(getApplication()).dogDao().getAllDogs()
+            dogsRetrieved(dogs)
+
+            Toast.makeText(
+                getApplication(),
+                "Dogs retrieved from database",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 
     private fun fetchFromRemote() {
@@ -34,9 +62,15 @@ class ListViewModel(application: Application) : BaseViewModel(application) {
             dogService.getDogs()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(object: DisposableSingleObserver<List<DogBreed>>() {
+                .subscribeWith(object : DisposableSingleObserver<List<DogBreed>>() {
                     override fun onSuccess(dogList: List<DogBreed>) {
                         storeDogsLocally(dogList)
+
+                        Toast.makeText(
+                            getApplication(),
+                            "Dogs retrieved from endpoint",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
 
                     override fun onError(err: Throwable) {
