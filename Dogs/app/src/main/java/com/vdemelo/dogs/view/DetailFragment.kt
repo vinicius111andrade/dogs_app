@@ -9,6 +9,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.vdemelo.dogs.R
+import com.vdemelo.dogs.util.getProgressDrawable
+import com.vdemelo.dogs.util.loadImage
 import com.vdemelo.dogs.viewmodel.DetailViewModel
 import com.vdemelo.dogs.viewmodel.ListViewModel
 import kotlinx.android.synthetic.main.fragment_detail.*
@@ -29,13 +31,12 @@ class DetailFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        viewModel = ViewModelProviders.of(this).get(DetailViewModel::class.java)
-        viewModel.fetch()
-
-        //preciso receber qual dog o usuario clicou, n sei fazer isso
         arguments?.let {
             dogUuid = DetailFragmentArgs.fromBundle(it).dogUuid
         }
+
+        viewModel = ViewModelProviders.of(this).get(DetailViewModel::class.java)
+        viewModel.fetch(dogUuid)
 
         observeViewModel()
     }
@@ -47,6 +48,9 @@ class DetailFragment : Fragment() {
                 dogPurpose.text = dog.bredFor
                 dogTemperament.text = dog.temperament
                 dogLifespan.text = dog.lifeSpan
+                context?.run {
+                    dogImage.loadImage(dog.imageUrl, getProgressDrawable(this))
+                }
             }
         })
     }
