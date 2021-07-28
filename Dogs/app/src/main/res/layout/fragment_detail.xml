@@ -2,9 +2,11 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-    
+
     <data>
-        <variable name="dog"
+
+        <variable
+            name="dog"
             type="com.vdemelo.dogs.model.DogBreed" />
     </data>
 
@@ -15,51 +17,52 @@
 
         <ImageView
             android:id="@+id/dogImage"
+            imageUrl="@{dog.imageUrl}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_dog_icon_round"
-            imageUrl="@{dog.imageUrl}"
+            android:minHeight="200dp"
             android:scaleType="fitCenter"
-            android:minHeight="200dp" />
+            android:src="@mipmap/ic_dog_icon_round" />
+
         <TextView
             android:id="@+id/dogName"
+            style="@style/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/dogImage"
-            style="@style/title"
-            android:text="@{dog.dogBreed}"
             android:layout_centerHorizontal="true"
-            android:layout_margin="4dp"/>
+            android:layout_margin="4dp"
+            android:text="@{dog.dogBreed}" />
 
         <TextView
             android:id="@+id/dogPurpose"
+            style="@style/text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/dogName"
-            style="@style/text"
-            android:text="@{dog.bredFor}"
             android:layout_centerHorizontal="true"
-            android:layout_margin="4dp"/>
+            android:layout_margin="4dp"
+            android:text="@{dog.bredFor}" />
 
         <TextView
             android:id="@+id/dogTemperament"
+            style="@style/text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/dogPurpose"
-            style="@style/text"
-            android:text="@{dog.temperament}"
             android:layout_centerHorizontal="true"
-            android:layout_margin="4dp"/>
+            android:layout_margin="4dp"
+            android:text="@{dog.temperament}" />
 
         <TextView
             android:id="@+id/dogLifespan"
+            style="@style/text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/dogTemperament"
-            style="@style/text"
-            android:text="@{dog.lifeSpan}"
             android:layout_centerHorizontal="true"
-            android:layout_margin="4dp"/>
+            android:layout_margin="4dp"
+            android:text="@{dog.lifeSpan}" />
 
     </RelativeLayout>
 </layout>
