@@ -3,8 +3,10 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+
         <variable
-            name="dogBreed" type="com.vdemelo.dogs.model.DogBreed" />
+            name="dogBreed"
+            type="com.vdemelo.dogs.model.DogBreed" />
     </data>
 
     <LinearLayout
@@ -14,6 +16,7 @@
 
         <ImageView
             android:id="@+id/imageView"
+            imageUrl="@{dogBreed.imageUrl}"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"

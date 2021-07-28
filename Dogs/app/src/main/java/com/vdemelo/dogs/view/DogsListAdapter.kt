@@ -40,11 +40,6 @@ class DogsListAdapter(val dogsList: ArrayList<DogBreed>): RecyclerView.Adapter<D
 //            action.dogUuid = dogsList[position].uuid
 //            Navigation.findNavController(it).navigate(action)
 //        }
-//
-//        holder.view.imageView.loadImage(
-//            dogsList[position].imageUrl,
-//            getProgressDrawable(holder.view.imageView.context)
-//        )
     }
 
     override fun getItemCount()= dogsList.size
