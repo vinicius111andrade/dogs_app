@@ -2,6 +2,11 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+    
+    <data>
+        <variable name="dog"
+            type="com.vdemelo.dogs.model.DogBreed" />
+    </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -13,6 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@mipmap/ic_dog_icon_round"
+            imageUrl="@{dog.imageUrl}"
             android:scaleType="fitCenter"
             android:minHeight="200dp" />
         <TextView
@@ -21,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/dogImage"
             style="@style/title"
-            android:text="Dog Name"
+            android:text="@{dog.dogBreed}"
             android:layout_centerHorizontal="true"
             android:layout_margin="4dp"/>
 
@@ -31,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/dogName"
             style="@style/text"
-            android:text="Dog Purpose"
+            android:text="@{dog.bredFor}"
             android:layout_centerHorizontal="true"
             android:layout_margin="4dp"/>
 
@@ -41,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/dogPurpose"
             style="@style/text"
-            android:text="Dog Temperament"
+            android:text="@{dog.temperament}"
             android:layout_centerHorizontal="true"
             android:layout_margin="4dp"/>
 
@@ -51,7 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/dogTemperament"
             style="@style/text"
-            android:text="Dog Lifespan"
+            android:text="@{dog.lifeSpan}"
             android:layout_centerHorizontal="true"
             android:layout_margin="4dp"/>
 
