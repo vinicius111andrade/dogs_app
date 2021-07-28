@@ -13,7 +13,7 @@ import com.vdemelo.dogs.util.getProgressDrawable
 import com.vdemelo.dogs.util.loadImage
 import kotlinx.android.synthetic.main.item_dog.view.*
 
-class DogsListAdapter(val dogsList: ArrayList<DogBreed>): RecyclerView.Adapter<DogsListAdapter.DogViewHolder>() {
+class DogsListAdapter(val dogsList: ArrayList<DogBreed>): RecyclerView.Adapter<DogsListAdapter.DogViewHolder>(), DogClickListener {
 
     fun updateDogList(newDogsList: List<DogBreed>) {
         dogsList.clear()
@@ -34,12 +34,14 @@ class DogsListAdapter(val dogsList: ArrayList<DogBreed>): RecyclerView.Adapter<D
 
     override fun onBindViewHolder(holder: DogViewHolder, position: Int) {
         holder.view.dogBreed = dogsList[position]
+        holder.view.listener = this
+    }
 
-//        holder.view.setOnClickListener{
-//            val action = ListFragmentDirections.actionDetailFragment()
-//            action.dogUuid = dogsList[position].uuid
-//            Navigation.findNavController(it).navigate(action)
-//        }
+    override fun onDogClicked(clickedView: View) {
+        val uuid: Int = clickedView.dogId.text.toString().toInt()
+        val action = ListFragmentDirections.actionDetailFragment()
+        action.dogUuid = uuid
+        Navigation.findNavController(clickedView).navigate(action)
     }
 
     override fun getItemCount()= dogsList.size
