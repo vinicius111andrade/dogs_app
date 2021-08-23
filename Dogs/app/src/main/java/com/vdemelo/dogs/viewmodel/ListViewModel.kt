@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.vdemelo.dogs.model.DogBreed
 import com.vdemelo.dogs.model.DogDataBase
 import com.vdemelo.dogs.model.DogsApiService
+import com.vdemelo.dogs.util.NotificationsHelper
 import com.vdemelo.dogs.util.SharedPreferencesHelper
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -71,6 +72,8 @@ class ListViewModel(application: Application) : BaseViewModel(application) {
                             "Dogs retrieved from endpoint",
                             Toast.LENGTH_SHORT
                         ).show()
+
+                        NotificationsHelper(getApplication()).createNotification()
                     }
 
                     override fun onError(err: Throwable) {
